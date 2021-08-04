@@ -34,7 +34,7 @@ build() {
 }
 
 run_test() {
-  docker run --rm -v ${PWD}/test:/project proto protoc -I protos --dart_out=output protos/test.proto
+  docker run --rm -v ${PWD}/test:/project "$unique_tag" protoc -I protos --dart_out=output protos/test.proto
 }
 
 tag_and_push() {
