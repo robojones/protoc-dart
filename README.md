@@ -32,23 +32,23 @@ docker run --rm -v=${PWD}:/project robojones/protoc-dart:latest protoc -I=protos
 ```
 
 Let's break this down!
-1. ```bash
+1. First, we need to make our project accessible inside the docker container.
+   We mount it to /project, which is the default working directory inside the container.
+   ```bash
    docker run --rm -v=${PWD}:/project
    ```
-   This part mounts the current directory into the container.
-   We mount it to /project, which is the default working directory.
-2. ```bash
+2. Next, we specify what version of the image we want to run. We use the latest version.
+   ```bash
    robojones/protoc-dart:latest
    ```
-   Here we specify what version of the image we want to run. We use the latest version.
-3. ```bash
-   protoc -I=protos --dart_out=lib/src/generated protos/api_spec.proto
-   ```
-   Finally, we run protoc inside the container.
+3. Finally, we run protoc inside the container.
    `-I=protos` tells protoc that `protos/` is the root directory for our *.proto files.
-   `--dart_out=lib/src/generated` means that we want our output to be in the dart language
+   `--dart_out=lib/src/generated` means that we want our output files to be in the Dart language
    and that it should write those files into `lib/src/generated`.
    The last parameter, `protos/api_spec.proto`, tells protoc that we want to compile that specific file.  
+   ```bash
+   protoc -I=protos --dart_out=lib/src/generated protos/api_spec.proto
+   ```
 
 ## Information
 
