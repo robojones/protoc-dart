@@ -49,6 +49,8 @@ main() {
   echo PROTOC_VERSION=$PROTOC_VERSION
   echo PROTOC_PLUGIN_VERSION=$PROTOC_PLUGIN_VERSION
 
+  docker login --username "$DOCKER_HUB_USERNAME" --password "$DOCKER_HUB_ACCESS_TOKEN"
+
   if tagDoesNotExist "dart-$DART_VERSION" || tagDoesNotExist "protoc-$PROTOC_VERSION" || tagDoesNotExist "protoc-plugin-$PROTOC_PLUGIN_VERSION"; then
     echo starting build...
 
