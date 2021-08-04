@@ -34,7 +34,6 @@ build() {
 }
 
 run_test() {
-  echo testing...
   docker run --rm -v ${PWD}/test:/project proto protoc -I protos --dart_out=output protos/test.proto
 }
 
@@ -55,6 +54,9 @@ main() {
     echo starting build...
 
     build
+
+    echo starting test...
+    run_test
 
     echo pushing tags...
     docker push "$unique_tag"
