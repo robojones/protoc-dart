@@ -15,8 +15,10 @@ ARG PROTOC_PLUGIN_VERSION
 
 COPY --from=protobuf /protoc/bin/protoc /bin/
 COPY --from=protobuf /protoc/include /usr/local/include
-RUN pub global activate protoc_plugin $PROTOC_PLUGIN_VERSION
 
 ENV PATH="/root/.pub-cache/bin:$PATH"
+RUN pub global activate protoc_plugin $PROTOC_PLUGIN_VERSION
+
+WORKDIR /project
 
 CMD protoc -I=/protos --dart_out=lib/src/protos protocol/protos/*.proto
