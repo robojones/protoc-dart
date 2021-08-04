@@ -30,7 +30,7 @@ build() {
     --build-arg PROTOC_VERSION=$PROTOC_VERSION \
     --build-arg PROTOC_PLUGIN_VERSION=$PROTOC_PLUGIN_VERSION \
     --tag "$unique_tag" \
-    ./docker
+    .
 }
 
 run_test() {
