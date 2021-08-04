@@ -23,4 +23,4 @@ RUN pub global activate protoc_plugin $PROTOC_PLUGIN_VERSION
 COPY README.md /README.md
 WORKDIR /project
 
-CMD protoc -I=/protos --dart_out=lib/src/protos protocol/protos/*.proto
+CMD echo For a usage example see: https://github.com/robojones/protoc-dart#readme
