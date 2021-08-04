@@ -12,7 +12,7 @@ PROTOC_VERSION="$(curl -sSL https://api.github.com/repos/protocolbuffers/protobu
 PROTOC_PLUGIN_VERSION="$(curl -sSL https://pub.dev/api/packages/protoc_plugin | jq -r .latest.version)"
 
 image_name="robojones/protoc-dart"
-unique_tag="$image_name:dart-$DART_VERSION-protoc-$PROTOC_VERSION-protoc-plugin-$PROTOC_PLUGIN_VERSION"
+unique_tag="$image_name:$PROTOC_PLUGIN_VERSION-dart$DART_VERSION-protoc$PROTOC_VERSION"
 
 tagDoesNotExist() {
   local tag_name=$1
@@ -35,7 +35,7 @@ build() {
 
 run_test() {
   echo testing...
-  docker run --rm -v ${PWD}/test:/project -w /project proto protoc -I protos --dart_out=output protos/test.proto
+  docker run --rm -v ${PWD}/test:/project proto protoc -I protos --dart_out=output protos/test.proto
 }
 
 tag_and_push() {
@@ -51,16 +51,16 @@ main() {
 
   docker login --username "$DOCKER_HUB_USERNAME" --password "$DOCKER_HUB_ACCESS_TOKEN"
 
-  if tagDoesNotExist "dart-$DART_VERSION" || tagDoesNotExist "protoc-$PROTOC_VERSION" || tagDoesNotExist "protoc-plugin-$PROTOC_PLUGIN_VERSION"; then
+  if tagDoesNotExist "$unique_tag"; then
     echo starting build...
 
     build
 
     echo pushing tags...
     docker push "$unique_tag"
-    tag_and_push "$image_name:dart-$DART_VERSION"
-    tag_and_push "$image_name:protoc-$PROTOC_VERSION"
-    tag_and_push "$image_name:protoc-plugin-$PROTOC_PLUGIN_VERSION"
+    tag_and_push "$image_name:$PROTOC_PLUGIN_VERSION-dart$DART_VERSION"
+    tag_and_push "$image_name:$PROTOC_PLUGIN_VERSION"
+
     tag_and_push "$image_name:latest"
   else
     echo Current build is up to date

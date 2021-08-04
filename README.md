@@ -52,11 +52,6 @@ Let's break this down!
 
 ## Information
 
-- All images are tagged with
-    - version of dart that they are based on
-    - version of protoc that they include
-    - version of the protoc-plugin installed
-    - a tag containing all three versions
 - Base image: [dart](https://hub.docker.com/_/dart)
 - protoc is downloaded from the Github release [github.com/protocolbuffers/protobuf](https://github.com/protocolbuffers/protobuf)
 - protoc-plugin-dart is installed from [pub.dev/packages/protoc_plugin](https://pub.dev/packages/protoc_plugin)
