@@ -58,10 +58,10 @@ main() {
 
     echo pushing tags...
     docker push "$unique_tag"
-    tag_and_push "$image_name:latest"
     tag_and_push "$image_name:dart-$DART_VERSION"
     tag_and_push "$image_name:protoc-$PROTOC_VERSION"
     tag_and_push "$image_name:protoc-plugin-$PROTOC_PLUGIN_VERSION"
+    tag_and_push "$image_name:latest"
   else
     echo Current build is up to date
   fi
