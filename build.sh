@@ -62,6 +62,8 @@ main() {
     tag_and_push "$image_name:dart-$DART_VERSION"
     tag_and_push "$image_name:protoc-$PROTOC_VERSION"
     tag_and_push "$image_name:protoc-plugin-$PROTOC_PLUGIN_VERSION"
+  else
+    echo Current build is up to date
   fi
 }
 
