@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+// test_package is used to test if the protoc-dart-plugin works
+package test_package;
+
+message TestMessage {
+  // some native fields
+  string name = 1;
+  int32 some_value = 2;
+}
