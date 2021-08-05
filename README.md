@@ -1,6 +1,6 @@
 # protoc-dart
 
-Docker image containing protoc and the dart-protoc-plugin.
+Docker image with protoc and the dart-protoc-plugin.
 
 > **INFO** This image is updated automatically. A nightly build job checks for new versions of dart, protoc and the dart-protoc-plugin every day.
 
@@ -12,7 +12,7 @@ Consider you have a project structure like this:
 my-project
  |- lib
  |   |- src
- |   |   |-generated <- the generated protobuf libraries will be here
+ |   |   |- generated <- the generated protobuf libraries will be here
  |   |   |...
  |   |
  |   |- my-project.dart
@@ -24,20 +24,20 @@ my-project
  |...
 ```
 
-We want to compile the `protos/api_spec.proto` and the output should be in the `lib/src/generated` directory.
-The correct command for this would be:
+We want to compile the `protos/api_spec.proto` and write the output files to the `lib/src/generated` directory.
+This can be done using the following command:
 
 ```bash
 docker run --rm -v=${PWD}:/project robojones/protoc-dart:latest protoc -I=protos --dart_out=lib/src/generated protos/api_spec.proto
 ```
 
-Let's break this down!
-1. First, we need to make our project accessible inside the docker container.
+That's a really long command – Let's break this down!
+1. First, we make our project accessible inside the docker container.
    We mount it to /project, which is the default working directory inside the container.
    ```bash
    docker run --rm -v=${PWD}:/project
    ```
-2. Next, we specify what version of the image we want to run. We use the latest version.
+2. Next, we specify what version of the image we want to use. We use the latest version.
    ```bash
    robojones/protoc-dart:latest
    ```
