@@ -61,6 +61,7 @@ main() {
     echo pushing tags...
     docker push "$image_name:$unique_tag"
     tag_and_push "$image_name:$PROTOC_PLUGIN_VERSION-dart$DART_VERSION"
+    tag_and_push "$image_name:$PROTOC_PLUGIN_VERSION-protoc$PROTOC_VERSION"
     tag_and_push "$image_name:$PROTOC_PLUGIN_VERSION"
 
     tag_and_push "$image_name:latest"
