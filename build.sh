@@ -7,9 +7,15 @@ if ! which jq > /dev/null; then
 fi
 
 # All version numbers excluding the v prefix
+echo "Fetch dart version"
 DART_VERSION="$(curl -sSL https://registry.hub.docker.com/v1/repositories/dart/tags | jq -r '[.[] | select(.name|test("^[0-9]+[.][0-9]+[.][0-9]+$")) | .name] | last')"
+echo "DART_VERSION=$DART_VERSION"
+echo "Fetch protoc version"
 PROTOC_VERSION="$(curl -sSL https://api.github.com/repos/protocolbuffers/protobuf/releases/latest | jq -r '.tag_name[1:]')"
-PROTOC_PLUGIN_VERSION="$(curl -sSL https://pub.dev/api/packages/protoc_plugin | jq -r .latest.version)"
+echo "PROTOC_VERSION=$PROTOC_VERSION"
+echo "Fetch protoc_plugin version"
+PROTOC_PLUGIN_VERSION="$(curl -sSL --compressed https://pub.dev/api/packages/protoc_plugin | jq -r .latest.version)"
+echo "PROTOC_PLUGIN_VERSION=$PROTOC_PLUGIN_VERSION"
 
 image_name="robojones/protoc-dart"
 unique_tag="$PROTOC_PLUGIN_VERSION-dart$DART_VERSION-protoc$PROTOC_VERSION"
@@ -44,10 +50,6 @@ tag_and_push() {
 }
 
 main() {
-  echo DART_VERSION=$DART_VERSION
-  echo PROTOC_VERSION=$PROTOC_VERSION
-  echo PROTOC_PLUGIN_VERSION=$PROTOC_PLUGIN_VERSION
-
   docker login --username "$DOCKER_HUB_USERNAME" --password "$DOCKER_HUB_ACCESS_TOKEN"
 
   if tagDoesNotExist "$unique_tag"; then
