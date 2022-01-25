@@ -52,6 +52,8 @@ That's a really long command – Let's break this down!
 
 ## Information
 
+The contents of this repository (build script, Dockerfile, etc.) are published unter the [MIT license](/LICENSE). This repository is not affiliated with the owners and publishers of protoc, the dart docker image or the protoc-plugin-dart plugin. Please inform yourself regarding the license terms of protoc, the dart docker image and the protoc-plugin-dart plugin. Their sources can be found here:
+
 - Base image: [dart](https://hub.docker.com/_/dart)
 - protoc is downloaded from the Github release [github.com/protocolbuffers/protobuf](https://github.com/protocolbuffers/protobuf)
 - protoc-plugin-dart is installed from [pub.dev/packages/protoc_plugin](https://pub.dev/packages/protoc_plugin)
