@@ -17,7 +17,8 @@ COPY --from=protobuf /protoc/bin/protoc /bin/
 COPY --from=protobuf /protoc/include /usr/local/include
 COPY --from=protobuf /protoc/readme.txt /protoc-readme.txt
 
-ENV PATH="/root/.pub-cache/bin:$PATH"
+ENV PUB_CACHE=/pub-cache
+ENV PATH="/pub-cache/bin:$PATH"
 RUN dart pub global activate protoc_plugin $PROTOC_PLUGIN_VERSION
 
 COPY README.md /README.md
